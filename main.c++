@@ -27,14 +27,25 @@ Capacitor createCapacitor(size_t size, double capacitance) {
     cap.C = capacitance;
 }
 
+void computeVoltage(Capacitor* capacitor,float V0, float I0, int time,float dt) {
+    capacitor->voltage[0] = V0;
+    capacitor->current[1] = I0;
+
+    for(int i = 1; i < time; i++){
+        capacitor->voltage[i] = capacitor->voltage[i-1] + capacitor->current[i-1]*dt*1/capacitor->C;
+    }
+}
+
+
+
 int main(int argc, char *argv[]) {
-    const float C = 100e-12;
+    const double C = 100e-12;
     const float R = 1000;
     const float V0 = 10;
     const float I0 = 1e-2;
     const float FinalTime = 5e-6;
     const float dt = 1e-10;
-    const float timestep = FinalTime / dt;
+    const int timestep = FinalTime / dt;
 
     Capacitor C1 = createCapacitor(timestep, C);
 
