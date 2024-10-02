@@ -36,6 +36,14 @@ void computeVoltage(Capacitor* capacitor,float V0, float I0, int time,float dt) 
     }
 }
 
+void computeCurrent(Capacitor* capacitor,float V0, float I0, int time,float dt, float R) {
+    capacitor->voltage[0] = V0;
+    capacitor->current[1] = I0;
+    for(int i = 1; i < time; i++) {
+        capacitor->current[i] = capacitor->current[i-1] - (capacitor->current[i-1]/(R*capacitor->C))*dt;
+    }
+
+}
 
 
 int main(int argc, char *argv[]) {
