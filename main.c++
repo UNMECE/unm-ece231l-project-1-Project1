@@ -28,6 +28,17 @@ Capacitor createCapacitor(size_t size, double capacitance) {
 }
 
 int main(int argc, char *argv[]) {
+    const float C = 100e-12;
+    const float R = 1000;
+    const float V0 = 10;
+    const float I0 = 1e-2;
+    const float FinalTime = 5e-6;
+    const float dt = 1e-10;
+    const float timestep = FinalTime / dt;
+
+    Capacitor C1 = createCapacitor(timestep, C);
+
+
 
     return 0;
 };
