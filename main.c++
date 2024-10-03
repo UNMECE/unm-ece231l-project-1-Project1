@@ -47,7 +47,6 @@ void computeCurrent(Capacitor* capacitor,float V0, float I0, float R, int time) 
     capacitor->voltage[0] = V0;
     capacitor->current[0] = I0;
     double dt = capacitor->time[1] - capacitor->time[0];
-    cout << dt << " " << time <<  endl;
     for(int i = 1; i < time; i++) {
         capacitor->current[i] = capacitor->current[i-1] - (capacitor->current[i-1]/(R*capacitor->C))*dt;
     }
