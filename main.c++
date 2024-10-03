@@ -9,7 +9,17 @@ struct _capacitor
     double *current;    // current array
     double C;           // capacitance value
 };
-typedef struct _capacitor Capacitor;
+typedef _capacitor Capacitor;
+
+struct _circuit {
+    Capacitor capacitor; // Capacitor struct
+    double V0;           // Initiale voltage of the circuit
+    double I0;           // Initiale current of the cicruit
+    double R;            // Resistance of the circuit
+}; typedef _circuit Circuit;
+
+
+
 
 Capacitor createCapacitor(float dt, float finalTime, double capacitance) {
     Capacitor cap;
@@ -31,6 +41,17 @@ Capacitor createCapacitor(float dt, float finalTime, double capacitance) {
     cap.C = capacitance;
     return cap;
 }
+
+Circuit createCircuit(Capacitor c, float V0, float I0, float R){
+    Circuit circuit;
+    circuit.capacitor = c;
+    circuit.V0 = V0;
+    circuit.I0 = I0;
+    circuit.R = R;
+    return circuit;
+}
+
+
 
 
 void computeVoltage(Capacitor* capacitor,float V0, float I0, int time) {
