@@ -9,14 +9,7 @@ struct _capacitor
     double *current;    // current array
     double C;           // capacitance value
 };
-typedef _capacitor Capacitor;
-
-struct _circuit {
-    Capacitor capacitor; // Capacitor struct
-    double V0;           // Initiale voltage of the circuit
-    double I0;           // Initiale current of the cicruit
-    double R;            // Resistance of the circuit
-}; typedef _circuit Circuit;
+typedef struct _capacitor Capacitor;
 
 Capacitor createCapacitor(float dt, float finalTime, double capacitance) {
     Capacitor cap;
@@ -39,14 +32,6 @@ Capacitor createCapacitor(float dt, float finalTime, double capacitance) {
     return cap;
 }
 
-Circuit createCircuit(Capacitor c, float V0, float I0, float R){
-    Circuit circuit;
-    circuit.capacitor = c;
-    circuit.V0 = V0;
-    circuit.I0 = I0;
-    circuit.R = R;
-    return circuit;
-}
 
 void computeVoltage(Capacitor* capacitor,float V0, float I0, int time) {
     capacitor->voltage[0] = 0;
@@ -74,26 +59,19 @@ void printCapacitor(Capacitor* capacitor,int time){
     }
 }
 
+
+
+
 int main(int argc, char *argv[]) {
     const double C = 100e-12;
-    const float finalTime = 5e-6;
-    const float dt = 1e-10;
-
-    Capacitor C1 = createCapacitor(dt,finalTime, C);
-    Capacitor C2 = createCapacitor(dt,finalTime, C);
-
-
     const float R = 1000;
     const float V0 = 10;
     const float I0 = 1e-2;
-
-
-    Circuit circuit1 = createCircuit(C1,0,I0,R); // Define the first circuit
-    Circuit circuit2 = createCircuit(C2,V0,0,R); // Define the second circuit
-
+    const float finalTime = 5e-6;
+    const float dt = 1e-10;
     const int time = int(finalTime/dt);
 
-
+    Capacitor C1 = createCapacitor(dt,finalTime, C);
 
     computeCurrent(&C1,V0,I0,R,time);
     computeVoltage(&C1,V0,I0,time);
