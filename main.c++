@@ -45,7 +45,7 @@ void computeVoltage(Capacitor* capacitor,float V0, float I0, int time) {
 
 void computeCurrent(Capacitor* capacitor,float V0, float I0, float R, int time) {
     capacitor->voltage[0] = V0;
-    capacitor->current[1] = I0;
+    capacitor->current[0] = I0;
     double dt = capacitor->time[1] - capacitor->time[0];
     cout << dt << " " << time <<  endl;
     for(int i = 1; i < time; i++) {
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     const float I0 = 1e-2;
     const float finalTime = 5e-6;
     const float dt = 1e-10;
-    const int time = finalTime/dt;
+    const int time = int(finalTime/dt);
 
     Capacitor C1 = createCapacitor(dt,finalTime, C);
 
