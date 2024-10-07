@@ -1,5 +1,7 @@
 #include <string>
 #include <iostream>
+#include <iomanip>
+
 using namespace std;
 
 struct _capacitor
@@ -54,15 +56,15 @@ void computeCurrent(Capacitor* capacitor,float V0, float I0, float R, int time) 
 }
 
 void printCapacitor(Capacitor* capacitor,int time){
-    for(int i = 0; i < time; i+=200) {
-        cout << capacitor->time[i] << " " << capacitor->voltage[i] << " " << capacitor->current[i] << endl;
+    for(int i = 0; i < time; i+=200) { //Every 200 stps print the values
+        cout << setw(8) << left <<  capacitor->time[i] << " | "<<  setw(8) << left << capacitor->voltage[i] << " | "<<  setw(8) << left << capacitor->current[i] << endl; //Format the output string as a table
     }
 }
 
 
 
 
-int main(int argc, char *argv[]) {
+int main(){
     const double C = 100e-12;
     const float R = 1000;
     const float V0 = 10;
@@ -73,9 +75,9 @@ int main(int argc, char *argv[]) {
 
     Capacitor C1 = createCapacitor(dt,finalTime, C);
 
-    computeCurrent(&C1,V0,I0,R,time);
-    computeVoltage(&C1,V0,I0,time);
-    printCapacitor(&C1,time);
+    computeCurrent(&C1,V0,I0,R,time); //Compute the current
+    computeVoltage(&C1,V0,I0,time);   //Compute the voltage
+    printCapacitor(&C1,time);         //print method every 200 steps
 
     return 0;
 };
